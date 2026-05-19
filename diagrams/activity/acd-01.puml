@@ -1,0 +1,64 @@
+@startuml "(ACD-01) Register"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Registrasi"
+footer "version 1.0"
+
+|Calon User|
+start
+repeat 
+:Isi Form Registrasi & Submit;
+    note right
+        **Data:**
+        role, email, nama,
+        no. HP, password
+    end note
+    |Sistem|
+    backward :Tampilkan Pesan Error;
+    |Sistem|
+    :Validasi Format Data &
+    Duplikasi Email;
+repeat while (Data Valid?) is (Tidak)
+->Ya;
+:Hash Password;
+:Simpan Data 
+Registrasi User;
+note right
+    **(DB)** users_registration table
+end note
+(A)
+detach
+(A)
+:Buat & Kirim 
+OTP via Email;
+|Calon User|
+' repeat
+:Input Kode OTP;
+|Sistem|
+:Verifikasi Kode OTP;
+if (OTP Sesuai?) then (Tidak)
+    :Tampilkan Pesan OTP Salah;
+    if (Salah >3x) then (Ya)
+        :Registrasi Gagal;
+        end
+    else (Tidak)
+
+    endif
+    |Calon User|
+    :Minta Kirim Ulang OTP;
+    (A)
+    detach
+else (Ya)
+    |Sistem|
+    :Simpan Data\nUser;
+    note right
+        **(DB)** users table
+    end note
+    :Hapus Data\nRegistrasi User;
+    note right
+        **(DB)** users_registration table
+    end note
+    :Tampilkan Pesan Registrasi Sukses;
+endif
+end
+@enduml

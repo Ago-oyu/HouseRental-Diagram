@@ -1,0 +1,66 @@
+@startuml "(UCD-01) House Rental System"
+'====================== Metadata ======================
+!include ../../theme.puml
+left to right direction
+title Use Case Diagram
+footer version 1.0
+'====================== Metadata ======================
+
+'NOTE: Karena setting l to r, arah jadi berubah
+' left <-> up
+' right <-> down
+
+'======================= Actor =======================
+actor Renter
+actor User
+actor Owner
+' User <|- Owner
+User <|- Renter
+'======================= Actor =======================
+
+'====================== Usecase ======================
+rectangle Sistem {
+    usecase (Register) as register
+    usecase (Login) as login
+    usecase (Reset\nPassword) as resetPassword
+    usecase (Mencari & Melihat\nProperti) as cariLihatProperti
+    usecase (Menyewa Properti) as sewaProperti
+    usecase (Mengatur Properti) as manageProperti
+    usecase (Memperpanjang Sewa) as perpanjangSewa
+    ' usecase (TTD kontrak) as ttdKontrak
+    usecase (Melakukan\nPembayaran) as bayar
+    usecase (Mengajukan Sewa) as mengajukanSewa
+    usecase (Memproses Pengajuan Sewa) as memprosesPengajuanSewa
+    usecase (Mengelola Kontrak Sewa) as mengelolaKontrak
+    usecase (Chat) as chat
+}
+'====================== Usecase ======================
+
+'================ Connection & Layout ================
+Renter --> cariLihatProperti
+
+Renter --> sewaProperti
+' sewaProperti ..> ttdKontrak : <<include>>
+sewaProperti ..> bayar : <<include>>
+sewaProperti ..> mengajukanSewa : <<include>>
+sewaProperti ..> mengelolaKontrak : <<include>>
+Renter --> perpanjangSewa
+perpanjangSewa ..> bayar : <<include>>
+
+Owner -up-> manageProperti
+Owner -up-> mengelolaKontrak
+Owner -up-> memprosesPengajuanSewa
+
+User --> register
+User --> login
+User --> resetPassword
+User --> chat
+
+' Renter
+'================ Connection & Layout ================
+
+
+
+'====================== Alignment ======================
+' Sistem -- Owner
+@enduml
