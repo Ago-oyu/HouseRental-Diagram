@@ -1,0 +1,41 @@
+@startuml "(ACD-04) Mengajukan Sewa"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Registrasi"
+footer "version 1.0"
+
+|Tenant|
+start
+:Pilih Properti yang Akan di Sewa;
+repeat
+    :Isi Form Request Sewa;
+    note right
+        **Data**:
+        Durasi/Skema Pembayaran,
+        Tanggal Mulai
+    end note
+    :Kirim Request;
+    |Sistem|
+    :Validasi Data;
+    backward :Tampilkan\nPesan Error;
+repeat while (Data Valid?) is (Tidak)
+->Ya;
+:Simpan Data Rental;
+note left
+    **(DB)** rentals table
+    status: requested
+end note
+:Kirim Tenant Pesan\nRequest Berhasil Dibuat;
+:Kirim Owner Notifikasi;
+|Owner|
+:Terima Notifikasi\nRequest Sewa;
+:Accept/Reject Request;
+|Sistem|
+if (request accepted?) then (Ya)
+    :Lanjut Tahap Negosiasi Kontrak;
+    stop
+else (Tidak)
+    :Tampilkan Pesan Request Rejected;
+    stop
+endif
+@enduml
