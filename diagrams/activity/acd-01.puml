@@ -14,10 +14,9 @@ repeat
         no. HP, password
     end note
     |Sistem|
-    backward :Tampilkan Pesan Error;
-    |Sistem|
     :Validasi Format Data &
     Duplikasi Email;
+    backward :Tampilkan Pesan Error;
 repeat while (Data Valid?) is (Tidak)
 ->Ya;
 :Hash Password;
@@ -38,16 +37,16 @@ OTP via Email;
 :Verifikasi Kode OTP;
 if (OTP Sesuai?) then (Tidak)
     :Tampilkan Pesan OTP Salah;
-    if (Salah >3x) then (Ya)
+    if (Salah >3x) then (Tidak)
+        |Calon User|
+        :Minta Kirim Ulang OTP;
+        (A)
+        detach
+    else (Ya)
+        |Sistem|
         :Registrasi Gagal;
-        end
-    else (Tidak)
-
+        stop
     endif
-    |Calon User|
-    :Minta Kirim Ulang OTP;
-    (A)
-    detach
 else (Ya)
     |Sistem|
     :Simpan Data\nUser;
@@ -60,5 +59,5 @@ else (Ya)
     end note
     :Tampilkan Pesan Registrasi Sukses;
 endif
-end
+stop
 @enduml
