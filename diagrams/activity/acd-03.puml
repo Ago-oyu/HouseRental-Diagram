@@ -1,0 +1,64 @@
+@startuml "(ACD-03) Listing Properti"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Listing Properti"
+footer "version 1.0"
+
+|Owner|
+Start
+:Masuk ke Halaman Kelola Properti;
+:Pilih Menu Tambah Properti;
+repeat
+    :Isi Form Informasi Umum;
+    note left
+        **Data**:
+        Nama Properti, 
+        Deskripsi, Status Rumah
+    end note
+    :Isi Form Lokasi;
+    note right
+        **Data**:
+        Provinsi, Kota/Kabupaten,
+        Kecamatan, Alamat Lengkap,
+        Link/URL Alamat
+    end note
+    :Isi Form Harga;
+    note left
+        **Data**:
+        Periode Pembayaran, Harga
+    end note
+    :Isi Form Detail Properti;
+    note right
+        **Data**:
+        Fasilitas, Luas Tanah,
+        Luas Bangunan, Jumlah Kamar,
+        Jumlah Kamar Mandi, Daya Listrik, Air 
+    end note
+    :Lampirkan Foto Properti;
+    note left
+        Maksimal 15 Foto
+    end note
+    |Sistem|
+    backward :Tampilkan Pesan Error; 
+repeat while (Data Valid?) is (Tidak)
+->Ya;
+if (Owner Slot > 0) then (Tidak)
+    :Tampilkan Pesan Slot\nProperti Owner Habis;
+    stop
+else (Ya)
+    :Simpan Foto Properti;
+    note right
+        **(Object Storage)**
+        property-image folder
+    end note
+    :Simpan Data Properti;
+    note right
+    **(DB)**
+    properties, properties_facilities,
+    properties_features, properties_images,
+    properties_location, and properties_pricing tables
+    end note
+endif
+:Tampilkan Pesan Berhasil;
+stop
+@enduml
