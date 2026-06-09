@@ -1,4 +1,17 @@
 @startuml "(C4D-01) System Context Diagram"
 !include <C4/C4_Container>
+footer "version 1.0"
 
+' LAYOUT_WITH_LEGEND()
+
+Person(tenant, "Tenant", "Person who want to rent a property")
+Person(renter, "Renter", "Person who want to rent out their property")
+System(houseRental, "House Rental System","sasa", $descr="Software System")
+System_Ext(docuSeal, "DocuSeal", "Provides e-signature services")
+System_Ext(paymentGW, "Midtrans", "Handles payment processing")
+
+Rel_D(tenant, houseRental, "Uses")
+Rel_D(renter, houseRental, "Uses")
+Rel_R(houseRental, docuSeal, "Handles e-signatures via")
+Rel_D(houseRental, paymentGW, "Processes payments via")
 @enduml

@@ -1,0 +1,32 @@
+@startuml "(C4D-02) Container Diagram"
+!include <C4/C4_Container>
+footer "version 1.0"
+
+Person(tenant, "Tenant", "Person who want to rent a property")
+Person(renter, "Renter", "Person who want to rent out their property")
+
+System_Boundary(houseRental, "House Rental System", "Software System") {
+    Container(website, "UI", "Web interface for tenants and renters", $techn="React SPA")
+    ' Container(mobileApp, "Mobile App", "PWA")
+    Container(backend, "Backend", "Handles requests from the website and mobile app", $techn="Node.js, Express.js")
+    ContainerDb(database, "Database", "Stores user and rental related data", $techn="MySQL")
+    ContainerDb(objectStorage, "Object Storage", "Stores documents and images", $techn="Vercel Blob")
+}
+
+System_Ext(docuSeal, "DocuSeal", "Provides e-signature services")
+System_Ext(paymentGW, "Midtrans", "Handles payment processing")
+' System_Ext(objectStorage, "Object Storage", "Stores documents and images")
+
+Rel(tenant, website, "Uses", "HTTPS")
+Rel(renter, website, "Uses", "HTTPS")
+
+Rel(website, backend, "Calls API to", "HTTPS")
+Rel(website, objectStorage, "Loads documents and images", "HTTPS")
+
+Rel_L(backend, objectStorage, "Stores documents and images", "HTTPS")
+Rel(backend, docuSeal, "Handles e-signatures via", "HTTPS")
+Rel_R(backend, paymentGW, "Processes payments via", "HTTPS")
+' Rel(mobileApp, backend, "Uses")
+Rel(backend, database, "Reads writes data", "MySQL protocol")
+
+@enduml
