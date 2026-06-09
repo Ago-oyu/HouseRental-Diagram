@@ -1,0 +1,18 @@
+@startuml "(ACD-02) Activity Diagram - User Login"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Login"
+footer "version 1.0"
+
+|User|
+start
+repeat
+:Isi Form Login & Submit;
+|Sistem|
+:Validasi Data Login;
+backward :Tampilkan Login Gagal;
+repeat while (Data Valid?) is (Tidak)
+->Ya;
+:Tampilkan Pesan Login Sukses;
+stop
+@enduml

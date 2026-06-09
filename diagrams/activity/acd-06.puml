@@ -1,0 +1,82 @@
+@startuml "(ACD-06) Negosiasi Kontrak"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Negosiasi Kontrak"
+footer "version 1.0"
+|Owner|
+|Sistem|
+|Tenant|
+start
+:Mendapatkan Notifikasi\nKontrak Sudah Dibuat;
+:Review Isi Kontrak;
+:Terima/Reject Kontrak;
+if (Kontrak Diterima?) then (Tidak)
+    |Sistem|
+    :Simpan Status Kontrak Ditolak;
+    note right
+        **(DB)** rentals table
+        status: cancelled
+    end note
+    |Owner|
+    :Mendapatkan Notifikasi\nKontrak Ditolak;
+    stop
+else (Ya)
+    |Tenant|
+    :Negosiasi/Lanjut Proses Tanda Tangan Kontrak;
+    if (Negosiasi?) then (Ya)
+        :Mengisi Form Negosiasi;
+        note left
+            **Data**:
+            Bagian Kontrak yang Ingin Diubah,
+            Alasan Perubahan
+        end note
+        (A)
+        detach
+        |Sistem|
+        (A)
+        :Simpan Data Negosiasi;
+        note right
+            **(DB)** rentals table
+            status: renegotiated
+        end note
+        |Owner|
+        :Mendapatkan Notifikasi\nPermintaan Negosiasi;
+        :Review Permintaan Negosiasi;
+        :Accept/Reject Permintaan Negosiasi;
+        if (Permintaan Negosiasi Diterima?) then (Ya)
+            :Kembali Ke Tahap Membuat Kontrak;
+            stop
+        else (Tidak)
+            |Sistem|
+            :Simpan Status Negosiasi Ditolak;
+            note right
+                **(DB)** rentals table
+                status: owner_rejected
+            end note
+            |Tenant|
+            :Mendapatkan Notifikasi\nPermintaan Negosiasi Ditolak;
+            stop
+        endif
+    else (Tidak)
+        |Sistem|
+        :Simpan Status Kontrak Diterima;
+        note right
+            **(DB)** rentals table
+            status: tenants_accepted
+        end note
+        |Owner|
+        :Mendapatkan Notifikasi\nKontrak Diterima;
+        (C)
+        detach
+        |Tenant|
+        (C)
+        :Melakukan Tanda Tangan Kontrak;
+        |Owner|
+        :Melakukan Tanda Tangan Kontrak;
+        |Sistem|
+        :Simpan Data Tanda Tangan;
+    endif
+endif
+:Lanjut ke Tahap Pembayaran;
+stop
+@enduml

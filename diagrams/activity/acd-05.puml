@@ -1,0 +1,31 @@
+@startuml "(ACD-05) Membuat Kontrak"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Membuat  Kontrak"
+footer "version 1.0"
+|Owner|
+start
+:Menyetujui Pengajuan Sewa;
+|Sistem|
+|Tenant|
+:Terima Notifikasi\nPengajuan Sewa Disetujui;
+|Owner|
+:Membuat Kontrak;
+if (Pilih Buat Kontrak Otomatis?) then (Tidak)
+    :Unduh Template Kontrak;
+    :Edit & Isi Template Kontrak;
+    :Unggah Kontrak yang Sudah Diisi;
+    |Sistem|
+else (Ya)
+    |Sistem|
+    :Buat Kontrak Secara Otomatis;
+endif
+|Sistem|
+:Simpan Data Kontrak;
+note right
+    **(DB)** legal_document table
+end note
+:Menampilkan Pesan Kontrak Berhasil Dibuat;
+:Lanjut ke Tahap Negosiasi Kontrak;
+stop
+@enduml
