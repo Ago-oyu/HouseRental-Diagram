@@ -21,6 +21,11 @@ else (Ya)
     :Buat Kontrak Secara Otomatis;
 endif
 |Sistem|
+:Update Status Kontrak;
+note right
+    **(DB)** rentals table
+    rentals_status: contract_generated
+end note
 :Simpan Data Kontrak;
 note right
     **(DB)** legal_document table

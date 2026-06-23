@@ -12,71 +12,62 @@ start
 :Terima/Reject Kontrak;
 if (Kontrak Diterima?) then (Tidak)
     |Sistem|
-    :Simpan Status Kontrak Ditolak;
+    :Update Status Kontrak;
     note right
         **(DB)** rentals table
-        status: cancelled
+        status: rejected
     end note
-    |Owner|
-    :Mendapatkan Notifikasi\nKontrak Ditolak;
-    stop
-else (Ya)
+    (A)
+    detach
     |Tenant|
-    :Negosiasi/Lanjut Proses Tanda Tangan Kontrak;
-    if (Negosiasi?) then (Ya)
+    (A)
+    :Mengajukan Negosiasi;
+    if (Negosiasi?) then (Tidak)
+        |Sistem|
+        :Membatalkan Permintaan Sewa;
+        :Update Data Sewa;
+        note right
+            **(DB)** rentals table
+            status: tenant_rejected
+        end note
+        stop
+    else (Ya)
+        |Tenant|
         :Mengisi Form Negosiasi;
         note left
             **Data**:
             Bagian Kontrak yang Ingin Diubah,
             Alasan Perubahan
         end note
-        (A)
-        detach
         |Sistem|
-        (A)
-        :Simpan Data Negosiasi;
+        :Update Data Sewa;
         note right
             **(DB)** rentals table
             status: renegotiated
         end note
         |Owner|
-        :Mendapatkan Notifikasi\nPermintaan Negosiasi;
         :Review Permintaan Negosiasi;
-        :Accept/Reject Permintaan Negosiasi;
+        :Respons Permintaan Negosiasi;
         if (Permintaan Negosiasi Diterima?) then (Ya)
             :Kembali Ke Tahap Membuat Kontrak;
-            stop
         else (Tidak)
             |Sistem|
-            :Simpan Status Negosiasi Ditolak;
-            note right
-                **(DB)** rentals table
-                status: owner_rejected
-            end note
-            |Tenant|
-            :Mendapatkan Notifikasi\nPermintaan Negosiasi Ditolak;
-            stop
+            (A)
+            detach
         endif
-    else (Tidak)
-        |Sistem|
-        :Simpan Status Kontrak Diterima;
-        note right
-            **(DB)** rentals table
-            status: tenants_accepted
-        end note
         |Owner|
-        :Mendapatkan Notifikasi\nKontrak Diterima;
-        (C)
-        detach
-        |Tenant|
-        (C)
-        :Melakukan Tanda Tangan Kontrak;
-        |Owner|
-        :Melakukan Tanda Tangan Kontrak;
-        |Sistem|
-        :Simpan Data Tanda Tangan;
+        stop
     endif
+else (Ya)
+    |Sistem|
+    :Simpan Status Kontrak Diterima;
+    note right
+        **(DB)** rentals table
+        status: tenants_accepted
+    end note
+    |Owner|
+    :Mendapatkan Notifikasi\nKontrak Diterima;
+    :Lanjut ke TTD Kontrak;
+    stop
 endif
-:Lanjut ke Tahap Pembayaran;
-stop
 @enduml
