@@ -1,0 +1,31 @@
+@startuml "(ACD-07) Pembayaran Tagihan - Cash"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Pembayaran Tagihan - Cash"
+footer "version 1.0"
+
+|Tenant|
+|Sistem|
+|Owner|
+|Tenant|
+start
+:Masuk ke Detail Invoice;
+:Pilih bayar secara cash;
+:Lakukan pembayaran secara cash;
+|Owner|
+:Terima pembayaran secara cash;
+:verifikasi pembayaran;
+|Sistem|
+:Update status Invoice;
+note right
+    **(DB)** rental_invoices table
+end note
+:Buat/update data pembayaran;
+note right
+    **(DB)** transactions table
+end note
+:Tampilkan pesan pembayaran berhasil;
+|Tenant|
+:Terima notifikasi pembayaran berhasil;
+stop
+@enduml

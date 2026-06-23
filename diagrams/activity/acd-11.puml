@@ -1,0 +1,53 @@
+@startuml "(ACD-11) Tambah Kuota Properti"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Tambah Kuota Properti"
+footer "(ACD-11) - version 1.0"
+
+|Owner|
+|Sistem|
+|Payment Gateway|
+|Owner|
+start
+:Masuk ke daftar Properti;
+:Pilih menu tambah kuota properti;
+:Pilih paket upgrade kuota properti;
+:Konfirmasi pembelian paket upgrade kuota properti;
+|Sistem|
+:Menyiapkan Transaksi;
+note right
+    **(DB)** order_slot_transactions table
+end note
+:Request pembayaran ke payment gateway;
+|Payment Gateway|
+:Membuat Transaksi pembayaran;
+:Memberikan response ke sistem;
+|Sistem|
+:Update data Transaksi;
+note right
+    **(DB)** order_slot_transactions table
+end note
+:Mengirimkan link pembayaran ke owner;
+|Owner|
+:Menyelesaikan pembayaran melalui link;
+|Payment Gateway|
+:Memproses pembayaran;
+|Sistem|
+:Menunggu callback dari payment gateway;
+|Payment Gateway|
+:Memberikan notifikasi ke sistem;
+|Sistem|
+:Update status Transaksi;
+
+note right
+    **(DB)** order_slot_transactions table
+end note
+:Update kuota properti;
+note right
+    **(DB)** owner_slots table
+end note
+:Kirim notifikasi pembayaran berhasil;
+|Owner|
+:Terima notifikasi pembayaran berhasil;
+:Melihat riwayat pembelian paket upgrade kuota properti;
+stop

@@ -1,0 +1,47 @@
+@startuml "(ACD-13) Perpanjangan Kontrak"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Perpanjangan Kontrak"
+footer "(ACD-13) - version 1.0"
+
+|Tenant|
+|Sistem|
+start
+:Mengirimkan Notifikasi\n untuk sewa yang akan berakhir;
+|Tenant|
+:Menerima Notifikasi\n untuk sewa yang akan berakhir;
+if (Tenant ingin memperpanjang sewa?) then (Tidak)
+    :Mengabaikan notifikasi;
+    stop
+else (ya)
+    :Mengajukan permohonan\nperpanjangan sewa;
+    |Sistem|
+    :Simpan permohonan perpanjangan sewa;
+    note right
+        **(DB)** rentals table
+        status: extension_requested
+    end note
+    |Owner|
+    :Merespons permohonan perpanjangan sewa;
+    if (Terima Permohonan?) then (Tidak)
+        :Isi alasan penolakan;
+        |Sistem|
+        :Update status permohonan perpanjangan sewa;
+        note right
+            **(DB)** rentals table
+            status: extension_rejected
+        end note
+        stop
+    endif
+    ->Ya;
+        :Update status permohonan perpanjangan sewa;
+        note right
+            **(DB)** rentals table
+            status: extension_accepted
+        end note
+        |Sistem|
+        :Kirim notifikasi kepada tenant;
+        |Owner|
+        :Lanjut ke tahap pembuatan Kontrak Baru;
+        stop
+endif

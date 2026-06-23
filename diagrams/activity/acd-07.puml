@@ -1,0 +1,52 @@
+@startuml "(ACD-07) Pembayaran Tagihan - Payment Gateway"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Pembayaran Tagihan - Payment Gateway"
+footer "version 1.0"
+
+|Tenant|
+|Sistem|
+|Payment Gateway|
+|Tenant|
+start
+:Masuk ke Detail Invoice;
+repeat
+:Pilih bayar menggunakan\npayment gateway;
+:Inisiasi pembayaran;
+|Sistem|
+:Melakukan request ke payment gateway;
+|Payment Gateway|
+:Memproses pembayaran;
+:Memberikan response ke sistem;
+|Sistem|
+:update data Invoice;
+note right
+    **(DB)** rental_invoices table
+    order_id
+end note
+:Mengirimkan link pembayaran ke tenant;
+|Tenant|
+:Menyelesaikan pembayaran melalui link;
+|Payment Gateway|
+:Memproses pembayaran;
+|Sistem|
+:Menunggu callback dari payment gateway;
+|Payment Gateway|
+:Memberikan notifikasi ke sistem;
+|Sistem|
+:Terima Notifikasi;
+:Update status Invoice;
+note left
+    **(DB)** rental_invoices table
+end note
+:Buat/update data pembayaran;
+note left
+    **(DB)** transactions table
+end note
+repeat while (pembayaran berhasil?) is (Tidak)
+->Ya;
+:Kirim notifikasi pembayaran berhasil;
+|Tenant|
+:Lihat Bukti Pembayaran;
+stop
+@enduml

@@ -1,0 +1,35 @@
+@startuml "(ACD-14) Perbarui Profil"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Perbarui Profil"
+footer "(ACD-14) - version 1.0"
+
+|Pengguna|
+start
+:Masuk ke halaman profil;
+:Lihat informasi profil;
+:Klik tombol perbarui profil;
+if (Perbarui foto profil?) then (Ya)
+    :Pilih foto profil baru;
+endif
+:Isi informasi profil yang ingin diperbarui;
+note right
+    **data:**
+    NIK, Nama, Email, Tanggal Lahir,
+    No. Telp, Alamat, Kontak Darurat, dll. 
+end note
+:Klik tombol simpan;
+|Sistem|
+:Validasi data profil yang diperbarui;
+:Perbarui foto profil pengguna;
+note right
+    **(DB)** user_photo_profiles table
+end note
+:Perbarui informasi profil pengguna;
+note right
+    **(DB)** user_profiles table
+end note
+:Tampilkan pesan profil berhasil diperbarui;
+|Pengguna|
+:Lihat detail profil yang diperbarui;
+stop

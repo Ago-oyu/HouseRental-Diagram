@@ -1,0 +1,34 @@
+@startuml "(ACD-16) Pemulihan Akun"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Pemulihan Akun"
+footer "(ACD-16) - version 1.0"
+
+|Pengguna|
+start
+:Gagal login karena lupa password;
+:Klik tautan "Lupa Password";
+:Isikan alamat email yang terdaftar;
+:Klik tombol kirim;
+|Sistem|
+:Validasi alamat email;
+:Jika email valid, kirimkan tautan pemulihan ke email;
+note right
+    **(DB)** user table
+end note
+:Tampilkan pesan email pemulihan terkirim;
+|Pengguna|
+:Periksa email dan klik tautan pemulihan;
+:Isi password baru;
+:Konfirmasi password baru;
+:Klik tombol simpan;
+|Sistem|
+:Validasi data yang dimasukkan;
+:Perbarui password pengguna;
+note right
+    **(DB)** user table
+end note
+:Tampilkan pesan password berhasil diperbarui;
+|Pengguna|
+:Redirect ke halaman login;
+stop

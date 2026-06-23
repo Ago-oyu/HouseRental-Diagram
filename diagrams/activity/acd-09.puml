@@ -1,0 +1,49 @@
+@startuml "(ACD-09) Sign Kontrak - Digital"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Sign Kontrak - Digital"
+footer "(ACD-09) - version 1.0"
+
+|Tenant|
+|Sistem|
+|e-Signature Service|
+|Owner|
+|Tenant|
+start
+:Masuk ke Detail Kontrak;
+:Pilih untuk menandatangani kontrak secara digital;
+|Sistem|
+:Melakukan request ke e-signature service;
+|e-Signature Service|
+:Memproses permintaan tanda tangan digital;
+|Sistem|
+:Menyediakan link untuk menandatangani kontrak;
+|Tenant|
+:Menyelesaikan proses tanda tangan digital melalui link;
+|e-Signature Service|
+:Memproses tanda tangan digital;
+|Sistem|
+:Terima notifikasi tanda tangan berhasil;
+|Sistem|
+:Update status Kontrak;
+note right
+    **(DB)** legal_document table
+end note
+:Kirim notifikasi ke owner;
+|Owner|
+:Terima notifikasi tanda tangan berhasil;
+:Tanda tangani kontrak secara digital;
+|e-Signature Service|
+:Memproses tanda tangan digital;
+|Sistem|
+:Terima notifikasi tanda tangan berhasil;
+:Update status Kontrak;
+note right
+    **(DB)** legal_document table
+end note
+:Kirim notifikasi ke tenant;
+|Tenant|
+:Terima notifikasi tanda tangan berhasil;
+:Lanjut ke Tahap Pembayaran;
+stop
+@enduml

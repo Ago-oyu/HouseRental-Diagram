@@ -1,0 +1,23 @@
+@startuml "(ACD-15) Reset Password"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Reset Password"
+footer "(ACD-15) - version 1.0"
+
+|Pengguna|
+start
+:Masuk ke halaman reset password;
+:Isi password lama;
+:Isi password baru;
+:Konfirmasi password baru;
+:Klik tombol simpan;
+|Sistem|
+:Validasi data yang dimasukkan;
+:Perbarui password pengguna;
+note right
+    **(DB)** user table
+end note
+:Tampilkan pesan password berhasil diperbarui;
+|Pengguna|
+:Redirect ke halaman profil;
+stop

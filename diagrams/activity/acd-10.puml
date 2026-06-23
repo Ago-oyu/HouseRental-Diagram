@@ -1,0 +1,42 @@
+@startuml "(ACD-10) Sign Kontrak - Manual"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Sign Kontrak - Manual"
+footer "(ACD-10) - version 1.0"
+
+|Tenant|
+|Sistem|
+|Owner|
+|Tenant|
+start
+:Masuk ke Detail Kontrak;
+:Pilih untuk menandatangani kontrak secara manual;
+:Unduh Dokumen Kontrak;
+repeat
+    :Tanda tangani kontrak secara manual;
+    :Unggah Dokumen Kontrak yang sudah ditandatangani;
+    |Sistem|
+    :Validasi Dokumen Kontrak yang diunggah;
+    backward :Tampilkan Pesan Gagal;
+repeat while (Dokumen Valid?) is (Tidak)
+->Ya;
+:Update Status Kontrak;
+:Tampilkan Pesan Berhasil;
+|Owner|
+:Terima Notifikasi Kontrak Telah Ditandatangani;
+:Unduh Dokumen Kontrak;
+repeat
+:Tanda tangani kontrak secara manual;
+:Unggah Dokumen Kontrak yang sudah ditandatangani;
+|Sistem|
+:Validasi Dokumen Kontrak yang diunggah;
+backward :Tampilkan Pesan Gagal;
+repeat while (Dokumen Valid?) is (Tidak)
+->Ya;
+:Update Status Kontrak;
+:Tampilkan Pesan Berhasil;
+|Tenant|
+:Terima Notifikasi Kontrak Telah Ditandatangani;
+:Lanjut ke Tahap Pembayaran;
+stop
+@enduml

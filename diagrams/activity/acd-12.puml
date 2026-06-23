@@ -1,0 +1,27 @@
+@startuml "(ACD-12) Cari Properti"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Cari Properti"
+footer "(ACD-12) - version 1.0"
+
+|Tenant|
+:Masuk ke halaman pencarian properti;
+:Masukkan kata kunci pencarian;
+:Tentukan lokasi properti;
+:Tentukan range harga properti;
+:Klik tombol cari;
+|Sistem|
+:Mencari properti berdasarkan kata kunci,\nlokasi, dan range harga;
+note right
+    **(DB)** properties table
+end note
+:Menampilkan daftar properti yang sesuai dengan kriteria pencarian;
+|Tenant|
+:Melihat daftar properti yang ditemukan;
+:Pilih properti yang diinginkan;
+|Sistem|
+:Menampilkan detail properti yang dipilih;
+|Tenant|
+:Melihat detail properti;
+stop
+@enduml

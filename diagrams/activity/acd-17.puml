@@ -1,0 +1,16 @@
+@startuml "(ACD-17) Logout"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Logout"
+footer "(ACD-17) - version 1.0"
+
+|Pengguna|
+start
+:Klik tombol logout;
+|Sistem|
+:Hapus token pengguna;
+note right
+    **(DB)** user_tokens table
+end note
+:Redirect ke halaman login;
+stop

@@ -1,0 +1,23 @@
+@startuml "(ACD-18) Verifikasi Rtpintar"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Verifikasi Rtpintar"
+footer "(ACD-18) - version 1.0"
+
+|Owner|
+start
+:Berhasil register akun Rtpintar\natau Update Nomor HP;
+|Sistem|
+:Kirim nomor HP untuk diverifikasi;
+|Rtpintar|
+:Verifikasi nomor HP;
+|Sistem|
+:Terima hasil verifikasi nomor HP;
+if (Nomor HP Valid?) then (Ya)
+    :Update status akun;
+    note right
+        **(DB)** users_profiles table
+        rtpintar: true
+    end note
+endif
+stop
