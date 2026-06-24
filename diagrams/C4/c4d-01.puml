@@ -9,9 +9,11 @@ Person(renter, "Renter", "Person who want to rent out their property")
 System(houseRental, "House Rental System","sasa", $descr="Software System")
 System_Ext(docuSeal, "DocuSeal", "Provides e-signature services")
 System_Ext(paymentGW, "Midtrans", "Handles payment processing")
+System_Ext(rtpintar, "Rtpintar API", "Handles Rtpintar Integration")
 
 Rel_D(tenant, houseRental, "Uses")
 Rel_D(renter, houseRental, "Uses")
 Rel_R(houseRental, docuSeal, "Handles e-signatures via")
 Rel_D(houseRental, paymentGW, "Processes payments via")
+Rel_D(houseRental, rtpintar,"Verifies Phone Number via")
 @enduml

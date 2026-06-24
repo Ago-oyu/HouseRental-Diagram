@@ -15,6 +15,7 @@ System_Boundary(houseRental, "House Rental System", "Software System") {
 
 System_Ext(docuSeal, "DocuSeal", "Provides e-signature services")
 System_Ext(paymentGW, "Midtrans", "Handles payment processing")
+System_Ext(rtpintar, "Rtpintar API", "Handles Rtpintar \nIntegration")
 ' System_Ext(objectStorage, "Object Storage", "Stores documents and images")
 
 Rel(tenant, website, "Uses", "HTTPS")
@@ -28,5 +29,6 @@ Rel(backend, docuSeal, "Handles e-signatures via", "HTTPS")
 Rel_R(backend, paymentGW, "Processes payments via", "HTTPS")
 ' Rel(mobileApp, backend, "Uses")
 Rel(backend, database, "Reads writes data", "MySQL protocol")
+Rel(backend, rtpintar, "Verifies Phone Number via", "HTTPS")
 
 @enduml

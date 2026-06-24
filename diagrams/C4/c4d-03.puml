@@ -6,17 +6,42 @@ System_Boundary(houseRental, "House Rental System", "Software System") {
     Container(website, "UI", "Web interface for tenants and renters", $techn="React SPA")
     Container_Boundary(backend, "Backend") {
         Component(authController, "Auth Controller", "Handles user authentication and authorization", $techn="REST Controller")
-        Component(userController, "User Controller", "Handles user-related operations", $techn="REST Controller")
+        Component(profileController, "Profile Controller", "Handles user-related operations", $techn="REST Controller")
         Component(rentalController, "Rental Controller", "Handles rental related operations", $techn="REST Controller")
         Component(propertyController, "Property Controller", "Handles property related operations", $techn="REST Controller")
         Component(paymentController, "Payment Controller", "Handles payment processing", $techn="REST Controller")
         Component(authService, "Auth Service", "Contains the business logic for user authentication, token generation, and password management", $techn="Node.js Service")
         Component(userService, "User Service", "Implements the core logic for managing user data", $techn="Node.js Service")
         Component(propertyService, "Property Service", "Implements the core logic for managing property data", $techn="Node.js Service")
+        Component(rentalService, "Rental Service", "Implements the core logic for managing rental data", $techn="Node.js Service")
+        Component(paymentService, "Payment Service", "Implements the core logic for processing payments", $techn="Node.js Service")
+        Component(signService, "Sign Service", "Handles e-signature operations", $techn="Node.js Service")
+
+        Component(mysqlRepository, "MySQL Repository", "Handles database operations for user and rental data", $techn="Node.js Repository")
     }
     ContainerDb(database, "Database", "Stores user and rental related data", $techn="MySQL")
     ContainerDb(objectStorage, "Object Storage", "Stores documents and images", $techn="Vercel Blob")
 }
-Rel(website, backend, "Calls API to", "HTTPS")
+    System_Ext(rtpintar, "Rtpintar API", "Handles Rtpintar Integration")
+    System_Ext(docuSeal, "DocuSeal", "Handles e-signature Integration")
+    System_Ext(midtrans, "Midtrans", "Handles payment processing")
+
+Rel_D(website, backend, "Calls API to", "HTTPS")
+Rel_D(authController, authService, "Delegates authentication and authorization tasks to")
+Rel_D(profileController, userService, "Delegates user profile tasks to")
+Rel_D(rentalController, rentalService, "Delegates rental tasks to")
+Rel_D(propertyController, propertyService, "Delegates property tasks to")
+Rel_D(paymentController, paymentService, "Delegates payment tasks to")
+Rel_D(authService, mysqlRepository, "Uses for user data")
+Rel_D(userService, mysqlRepository, "Uses for user data")
+Rel_D(propertyService, mysqlRepository, "Uses for property data")
+Rel_D(rentalService, mysqlRepository, "Uses for rental data")
+Rel_D(paymentService, mysqlRepository, "Uses for payment data")
+Rel_D(signService, objectStorage, "Uses for document storage")
+Rel_D(signService, docuSeal, "Uses for e-signature operations")
+Rel_D(paymentService, midtrans, "Uses for payment processing")
+Rel(userService, rtpintar, "Uses for phone number verification")
+
+Rel_D(mysqlRepository, database, "Reads and writes data to")
 
 @enduml
