@@ -1,8 +1,8 @@
 @startuml "(ACD-18) Verifikasi Rtpintar"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Verifikasi Rtpintar"
-footer "(ACD-18) - version 1.0"
+title "(ACD-18) Verifikasi Rtpintar"
+footer "version 1.0"
 
 |Owner|
 start

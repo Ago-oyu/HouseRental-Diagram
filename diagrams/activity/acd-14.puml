@@ -1,8 +1,8 @@
 @startuml "(ACD-14) Perbarui Profil"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Perbarui Profil"
-footer "(ACD-14) - version 1.0"
+title "(ACD-14) Perbarui Profil"
+footer "version 1.0"
 
 |Pengguna|
 start

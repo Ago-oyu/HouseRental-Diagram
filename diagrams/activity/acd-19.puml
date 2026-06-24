@@ -1,8 +1,8 @@
 @startuml "(ACD-19) Akhiri Sewa Sebelum Kontrak Berakhir"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Akhiri Sewa Sebelum Kontrak Berakhir"
-footer "(ACD-19) - version 1.0"
+title "(ACD-19) Akhiri Sewa Sebelum Kontrak Berakhir"
+footer "version 1.0"
 
 |Tenant|
 |Sistem|

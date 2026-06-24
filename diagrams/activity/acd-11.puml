@@ -1,8 +1,8 @@
 @startuml "(ACD-11) Tambah Kuota Properti"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Tambah Kuota Properti"
-footer "(ACD-11) - version 1.0"
+title "(ACD-11) Tambah Kuota Properti"
+footer "version 1.0"
 
 |Owner|
 |Sistem|

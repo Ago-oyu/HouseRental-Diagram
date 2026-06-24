@@ -1,8 +1,8 @@
 @startuml "(ACD-17) Logout"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Logout"
-footer "(ACD-17) - version 1.0"
+title "(ACD-17) Logout"
+footer "version 1.0"
 
 |Pengguna|
 start

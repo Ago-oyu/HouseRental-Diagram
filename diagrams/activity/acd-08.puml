@@ -1,7 +1,7 @@
 @startuml "(ACD-07) Pembayaran Tagihan - Cash"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Pembayaran Tagihan - Cash"
+title "(ACD-08) Pembayaran Tagihan - Cash"
 footer "version 1.0"
 
 |Tenant|

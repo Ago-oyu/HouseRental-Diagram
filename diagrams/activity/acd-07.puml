@@ -1,7 +1,7 @@
 @startuml "(ACD-07) Pembayaran Tagihan - Payment Gateway"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Pembayaran Tagihan - Payment Gateway"
+title "(ACD-07) Pembayaran Tagihan - Payment Gateway"
 footer "version 1.0"
 
 |Tenant|

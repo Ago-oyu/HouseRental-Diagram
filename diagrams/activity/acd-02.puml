@@ -1,7 +1,7 @@
 @startuml "(ACD-02) Activity Diagram - User Login"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Login"
+title "(ACD-02) Login"
 footer "version 1.0"
 
 |User|

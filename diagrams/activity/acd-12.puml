@@ -1,8 +1,8 @@
 @startuml "(ACD-12) Cari Properti"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Cari Properti"
-footer "(ACD-12) - version 1.0"
+title "(ACD-12) Cari Properti"
+footer "version 1.0"
 
 |Tenant|
 :Masuk ke halaman pencarian properti;

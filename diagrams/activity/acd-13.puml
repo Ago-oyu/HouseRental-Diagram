@@ -1,8 +1,8 @@
 @startuml "(ACD-13) Perpanjangan Kontrak"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Perpanjangan Kontrak"
-footer "(ACD-13) - version 1.0"
+title "(ACD-13) Perpanjangan Kontrak"
+footer "version 1.0"
 
 |Tenant|
 |Sistem|

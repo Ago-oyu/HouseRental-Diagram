@@ -1,7 +1,7 @@
 @startuml "(ACD-06) Negosiasi Kontrak"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Negosiasi Kontrak"
+title "(ACD-06) Negosiasi Kontrak"
 footer "version 1.0"
 |Owner|
 |Sistem|

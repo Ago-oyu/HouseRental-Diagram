@@ -1,7 +1,7 @@
 @startuml "(ACD-01) Register"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Registrasi"
+title "(ACD-01) Registrasi"
 footer "version 1.0"
 
 |Calon User|

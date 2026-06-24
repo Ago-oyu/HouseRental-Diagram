@@ -1,7 +1,7 @@
 @startuml "(ACD-05) Membuat Kontrak"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Membuat  Kontrak"
+title "(ACD-05) Membuat Kontrak"
 footer "version 1.0"
 |Owner|
 start

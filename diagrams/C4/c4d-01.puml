@@ -1,5 +1,6 @@
 @startuml "(C4D-01) System Context Diagram"
 !include <C4/C4_Container>
+title "(C4D-01) System Context Diagram"
 footer "version 1.0"
 
 ' LAYOUT_WITH_LEGEND()

@@ -1,8 +1,8 @@
 @startuml "(ACD-09) Sign Kontrak - Digital"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Sign Kontrak - Digital"
-footer "(ACD-09) - version 1.0"
+title "(ACD-09) Sign Kontrak - Digital"
+footer "version 1.0"
 
 |Tenant|
 |Sistem|

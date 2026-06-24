@@ -1,8 +1,8 @@
 @startuml "(ACD-10) Sign Kontrak - Manual"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Sign Kontrak - Manual"
-footer "(ACD-10) - version 1.0"
+title "(ACD-10) Sign Kontrak - Manual"
+footer "version 1.0"
 
 |Tenant|
 |Sistem|

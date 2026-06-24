@@ -1,8 +1,8 @@
 @startuml "(ACD-16) Pemulihan Akun"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Pemulihan Akun"
-footer "(ACD-16) - version 1.0"
+title "(ACD-16) Pemulihan Akun"
+footer "version 1.0"
 
 |Pengguna|
 start

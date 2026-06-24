@@ -1,5 +1,6 @@
 @startuml "(C4D-02) Container Diagram"
 !include <C4/C4_Container>
+title "(C4D-02) Container Diagram"
 footer "version 1.0"
 
 Person(tenant, "Tenant", "Person who want to rent a property")

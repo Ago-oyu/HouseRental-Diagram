@@ -1,8 +1,8 @@
 @startuml "(ACD-15) Reset Password"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Reset Password"
-footer "(ACD-15) - version 1.0"
+title "(ACD-15) Reset Password"
+footer "version 1.0"
 
 |Pengguna|
 start

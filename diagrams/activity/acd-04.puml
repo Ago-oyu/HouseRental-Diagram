@@ -1,7 +1,7 @@
 @startuml "(ACD-04) Mengajukan Sewa"
 !include ../../activity-config.puml
 !include ../../theme.puml
-title "Mengajukan Sewa"
+title "(ACD-04) Mengajukan Sewa"
 footer "version 1.0"
 
 |Tenant|

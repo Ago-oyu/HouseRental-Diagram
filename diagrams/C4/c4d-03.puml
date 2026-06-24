@@ -1,6 +1,7 @@
 @startuml "(C4D-03) Component Diagram - Backend Container"
 ' !include <C4/C4_Container>
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title "(C4D-03) Component Diagram - Backend Container"
 footer "version 1.0"
 System_Boundary(houseRental, "House Rental System", "Software System") {
     Container(website, "UI", "Web interface for tenants and renters", $techn="React SPA")
