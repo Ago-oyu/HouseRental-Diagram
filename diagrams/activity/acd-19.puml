@@ -1,0 +1,46 @@
+@startuml "(ACD-19) Akhiri Sewa Sebelum Kontrak Berakhir"
+!include ../../activity-config.puml
+!include ../../theme.puml
+title "Akhiri Sewa Sebelum Kontrak Berakhir"
+footer "(ACD-19) - version 1.0"
+
+|Tenant|
+|Sistem|
+|Owner|
+
+|Tenant|
+start
+:Masuk ke halaman detail sewa;
+:Klik tombol akhiri sewa lebih awal;
+:Isi alasan akhiri sewa lebih awal;
+:Isi tanggal rencana akhiri sewa;
+:Konfirmasi akhiri sewa lebih awal;
+|Sistem|
+:Update status sewa;
+note right
+    **(DB)** rentals table
+    status: "active_request_early_termination"
+end note
+|Owner|
+:Terima notifikasi permintaan akhiri sewa lebih awal;
+:Respon permintaan akhiri sewa lebih awal;
+if (Owner setuju?) then (Tidak)
+    |Sistem|
+    :Update status sewa;
+    note right
+        **(DB)** rentals table
+        status: "active_request_early_termination_rejected"
+    end note
+    stop
+endif
+->Ya;
+    |Sistem|
+    :Simpan data sewa;
+    note right
+        **(DB)** rentals table
+        status: "active_request_early_termination_accepted"
+        end_date: <tanggal_berakhir_sewa>
+    end note
+    |Tenant|
+    :Terima notifikasi permintaan akhiri sewa lebih awal disetujui;
+    stop
